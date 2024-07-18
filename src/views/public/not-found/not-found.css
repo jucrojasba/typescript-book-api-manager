@@ -1,0 +1,19 @@
+.root-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.not-found-container{
+    width: fit-content;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(21, 21, 114);
+    border-radius: 30px;
+    padding: 50px;
+    color: rgb(43, 43, 110);
+}
