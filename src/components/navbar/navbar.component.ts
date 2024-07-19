@@ -5,6 +5,7 @@ const navbar = `
 <div class="upper-bar">
 <div id="filter">
 <form>
+<input type="number" name="books" id="books" min="5" max="50" step="5" placeholder="5">
 </form>
 </div>
 <nav>
