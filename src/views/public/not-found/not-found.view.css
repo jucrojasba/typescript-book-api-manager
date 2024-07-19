@@ -1,19 +1,46 @@
-.root-container{
+.root-container-not-found{
     width: 100vw;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);;
 }
 .not-found-container{
     width: fit-content;
-    height: 20vh;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-3);
+    border-radius: 30px;
+    padding: 30px;
+    color: rgb(43, 43, 110);
+    background-color: white;
+}
+
+.image-not-found{
+    content: url("../../../assets/images/not-found-shakira.jpg");
+    width: 350px;
+    border-radius: 20px;
+}
+
+.message{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid rgb(21, 21, 114);
-    border-radius: 30px;
-    padding: 50px;
-    color: rgb(43, 43, 110);
+}
+
+#back-home{
+    cursor: pointer;
+    background-color: var(--white-color);
+    padding: var(--spacing-2);
+    border-radius: var(--spacing-2);
+    color: var(--main-color);
+    transition: color 0.9s, background-color 0.9s;
+}
+#back-home:hover{
+    scale:1.02;
+    background-color: var(--second-color);
 }

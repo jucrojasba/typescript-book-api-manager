@@ -1,4 +1,5 @@
 import { router } from "./router";
+import "./styles.css";
 
 const $root = document.getElementById('root') as HTMLElement;
 
