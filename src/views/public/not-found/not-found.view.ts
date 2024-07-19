@@ -1,4 +1,4 @@
-import './not-found.css'
+import './not-found.view.css'
 
 export function notFoundView(){
     const $root = document.getElementById('root') as HTMLElement;

@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:100,300,400,500,600,700,800, 800i, 900&display=swap");
+
+:root {
+  /* Colors */
+  --main-color: #001f3f;
+  --second-color: #bdc3c7;
+  --third-color: #87ceeb;
+  --white-color: #ffffff;
+
+  /* Spacing */
+  --spacing-1: 6px;
+  --spacing-2: 8px;
+  --spacing-3: 10px;
+  --spacing-4: 20px;
+  --spacing-5: 40px;
+
+  /* Box shadow */
+  --box-shadow: 0px 22px 36px 8px rgba(121, 121, 121, 0.1);
+
+  /* Breakpoints */
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+}
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+  font-family: Roboto;
+}
