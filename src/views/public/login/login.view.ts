@@ -3,6 +3,7 @@ import { UserController } from "../../../controllers/user.controller";
 import { navigateTo } from "../../../router";
 import { showModal } from "../../../components/modals/modal.component";
 import { RequestLoginUser, ResponseUser } from "../../../models/user.model";
+import { encrypt } from "../../../services/guard"
 
 export function loginView():void {
   //Page Content Login View
@@ -47,8 +48,12 @@ export function loginView():void {
         const resultLogin: ResponseUser = await userLogin.postLogin(
           dataToLogin
         );
-        localStorage.setItem("token", resultLogin.data.token);
+        localStorage.setItem(`${encrypt('token')}`, encrypt(resultLogin.data.token));
+        localStorage.setItem(`${encrypt('role')}`, encrypt(resultLogin.data.role));
+        localStorage.setItem(`${encrypt('email')}`, encrypt(resultLogin.data.email));
+
         navigateTo("/home");
+        window.location.reload();
       } catch (error) {
         showModal(`${error}`);
       }

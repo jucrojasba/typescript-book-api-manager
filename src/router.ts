@@ -1,4 +1,5 @@
 import { routes } from "./helpers/routes";
+import { encrypt, decrypt } from "./services/guard";
 
 export function router() {
     
@@ -6,8 +7,22 @@ export function router() {
     const path = window.location.pathname;
     const publicRoute = routes.public.find(r => r.path === path);
     const privateRoute = routes.private.find(r => r.path === path);
-    const token:string|null = localStorage.getItem('token');;
+    const adminRoute = routes.admin.find(r => r.path === path);
     
+    //Check sesion persistence in local Storage 
+    function checkLocalStorage(){
+        let token, role:string|null=null;
+        if(localStorage.length != 0){
+            token = decrypt(`${localStorage.getItem(encrypt('token'))}`);
+            role =decrypt(`${localStorage.getItem(encrypt('role'))}`);
+        }
+        return {token, role}
+    }
+
+    //Asign checked values to token and role
+    const token = checkLocalStorage().token;
+    const role = checkLocalStorage().role;
+
     //Si accede a ruta principal y no hay token
     if(path == '/' && !token) {
         navigateTo('/login');
@@ -16,6 +31,12 @@ export function router() {
 
     //Si accede a ruta principal y hay token
     if(path == '/' && token) {
+        navigateTo('/home');
+        return
+    }
+
+    //Si accede a la ruta admin y no es admin
+    if(path=='/admin' && role !== 'admin'){
         navigateTo('/home');
         return
     }
@@ -44,8 +65,20 @@ export function router() {
         }
     }
 
+    //Manejo de rutas privadas
+
+    if(adminRoute){
+        if(token){
+            adminRoute.component();
+            return;
+        }else{
+            navigateTo('/login');
+            return;
+        }
+    }
+
 //Si no encuentra la ruta redirije a not-found
-    if((!publicRoute || !privateRoute) && path != '/'){
+    if((!publicRoute || !privateRoute || !adminRoute) && path != '/'){
         navigateTo('/not-found');
         return;
     }

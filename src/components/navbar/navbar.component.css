@@ -1,0 +1,78 @@
+.upper-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(var(--main-color),#001f3fb2);
+    top: 0;
+    width: 100vw;
+    padding: var(--spacing-1) var(--spacing-4);
+}
+
+.upper-bar #user-navbar{
+ content: url('../../assets/icons/user-icon.png');
+ width: 40px;
+ height: 40px;
+}
+
+.upper-bar #book-navbar-icon{
+    content: url('../../assets/icons/book-icon.png');
+    width: 20px;
+    height: 20px;
+}
+
+.upper-bar #logout-icon{
+    content: url('../../assets/icons/logout-icon.png');
+    width: 15px;
+    height: 15px;
+}
+
+.upper-bar #create-book-icon{
+    content: url('../../assets/icons/create-book-icon.png');
+    width: 20px;
+    height: 20px;
+}
+
+.upper-bar #set-admin-icon{
+    content: url('../../assets/icons/set-admin-icon.png');
+    width: 16px;
+    height: 16px;
+}
+
+.upper-bar > #authInfo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-4);
+}
+
+.upper-bar>#authInfo>.auth-message{
+    color: var(--white-color);
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+}
+
+.upper-bar>nav>ul{
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-2);
+}
+
+.upper-bar>nav>ul>li button{
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+    color: var(--white-color);
+    border: none;
+    transition: color 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-1);
+}
+.upper-bar>nav>ul>li button:hover{
+scale: 1.02;
+color: var(--third-color);
+transition: 0.2s;
+}
