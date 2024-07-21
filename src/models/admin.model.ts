@@ -5,11 +5,15 @@ export interface RequestAllUser{
 
 export interface ResponseAdmin{
     message:string,
-    data:Record<string,string>
+    data:Array<Record<string,string>>
 }
 
 export interface RequestUpdateRol{
     id:string,
     roleToUpdate:string,
     token:string
+}
+export interface ResponseUpdateRole{
+    message:string,
+    data:Record<string,string>
 }

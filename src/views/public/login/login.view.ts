@@ -32,12 +32,12 @@ export function loginView():void {
   const $loginForm = document.getElementById("login-form") as HTMLFormElement;
 
   //Instantiate User Info for Login
-  const endpointLogin = "/api/v1/auth/login";
+  const endpointLogin:string = "/api/v1/auth/login";
   const userLogin: UserController = new UserController(endpointLogin);
 
   //Logic to Login
 
-  $loginForm?.addEventListener("submit", async (e) => {
+  $loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     if ($email.value && $password.value) {
       const dataToLogin: RequestLoginUser = {

@@ -2,9 +2,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: linear-gradient(var(--main-color),#001f3fb2);
+    background: linear-gradient(var(--second-color),#ffffff00);
+
     top: 0;
     width: 100vw;
+    height: 80px;
     padding: var(--spacing-1) var(--spacing-4);
 }
 
@@ -46,7 +48,7 @@
 }
 
 .upper-bar>#authInfo>.auth-message{
-    color: var(--white-color);
+    color: var(--main-color);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-1);
@@ -63,7 +65,7 @@
 .upper-bar>nav>ul>li button{
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0);
-    color: var(--white-color);
+    color: var(--main-color);
     border: none;
     transition: color 0.5s;
     display: flex;
@@ -73,6 +75,6 @@
 }
 .upper-bar>nav>ul>li button:hover{
 scale: 1.02;
-color: var(--third-color);
+color: rgb(3, 100, 79);
 transition: 0.2s;
 }

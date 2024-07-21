@@ -58,20 +58,24 @@ export function navBar() {
     navigateTo('/login');
   })
 
-  //Logic of set admin
-  const $setAdmin = document.getElementById('setAdmin') as HTMLButtonElement;
-  $setAdmin.addEventListener('click',(e)=>{
+  
+  if(role=='admin'){
+    //Logic of set admin
+    const $setAdmin = document.getElementById('setAdmin') as HTMLButtonElement;
+    $setAdmin.addEventListener('click',(e)=>{
     e.preventDefault();
     navigateTo('/set-admin');
   })
+    //Logic of Create Book
 
+
+  }
+  
   //Logic of My Books
   const $myBooks = document.getElementById('books-navbar') as HTMLButtonElement;
   $myBooks.addEventListener('click',(e)=>{
     e.preventDefault();
     navigateTo('/home');
   })
-
-  //Logic of Create Book
 
 }
