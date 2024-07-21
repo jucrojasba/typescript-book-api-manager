@@ -1,0 +1,41 @@
+.costumer-container {
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    max-width: none;
+    gap: var(--spacing-3);
+}
+
+.costumer-container >h1{
+    color: var(--main-color);
+}
+
+.costumer-container > #books-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+#book-card-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-5);
+    gap: var(--spacing-4);
+}
+
+/* Styles to preview and next buttons */
+#buttons-book-container {
+    display: flex;
+}
+#buttons-book-container > button{
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    cursor: pointer;
+    font-size: 100%;
+}

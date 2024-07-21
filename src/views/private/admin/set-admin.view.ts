@@ -13,7 +13,6 @@ export function setAdminView(){
   $root.innerHTML = `
     <div class="admin-container">
       <h1>User Managment</h1>
-      <p>
       <div id="users-container">
           <div id="buttons-admin-container">
             <button id="load-prev" style="display: none;">⮜ Previus</button>
