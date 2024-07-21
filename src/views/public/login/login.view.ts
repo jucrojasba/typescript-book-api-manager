@@ -31,7 +31,7 @@ export function loginView():void {
   const $password = document.getElementById("password") as HTMLInputElement;
   const $loginForm = document.getElementById("login-form") as HTMLFormElement;
 
-  //Instanciar User Info para Login
+  //Instantiate User Info for Login
   const endpointLogin = "/api/v1/auth/login";
   const userLogin: UserController = new UserController(endpointLogin);
 
