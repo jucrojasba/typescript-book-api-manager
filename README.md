@@ -61,8 +61,9 @@ The application includes the following features:
 
 Credentials and other sensitive information are stored in the .env file. Ensure this file is configured correctly to
 
-## Folder Map
+## Folder Structure
 
+```
 root/
 ├── src/
 │   ├── assets/
@@ -86,4 +87,5 @@ root/
 │           ├── login/
 │           ├── register/
 │           └── not-found/
+```
 
