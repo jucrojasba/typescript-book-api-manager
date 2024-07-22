@@ -1,11 +1,11 @@
-import { PostBook, ResponseBook } from "../../models/book.model";
+import { ResponseBook, UpdateBook } from "../../models/book.model";
 import { BookController } from "../../controllers/book.controller";
 import { decrypt, encrypt } from "../../services/guard";
 import { showModal } from "../../components/modals/modal.component";
-import "./create-book.component.css";
+import "./update-book.component.css";
 import { capitalizeFirstLetter } from "../../helpers/string-helpers";
 
-export function createBook() {
+export function updateBook(id:string) {
   // Page Content
   const modalHTML = `
     <div id="modal-container" class="modal-container" style="display: none;">
@@ -34,21 +34,21 @@ export function createBook() {
   //Get values to create book
     if ($modalContainer && $modalMessage && $closeButton) {
       $modalMessage.innerHTML = `
-      <form id="create-form">
-      <h1>Create Book</h1>
-      <input type="text" name="title" id="titleCreate" placeholder="Enter new book title" maxlength="80">
-      <input type="text" name="author" id="authorCreate" placeholder="Enter author name" maxlength="80">
-      <input type="text" name="description" id="descriptionCreate" placeholder="Enter a description" maxlength="80">
-      <input type="text" name="summary" id="summaryCreate" placeholder="Enter a summary" maxlength="80">
+      <form id="update-form">
+      <h1>Update Book</h1>
+      <input type="text" name="title" id="titleCreate" placeholder="Enter a new book title" maxlength="80">
+      <input type="text" name="author" id="authorCreate" placeholder="Enter a new author name" maxlength="80">
+      <input type="text" name="description" id="descriptionCreate" placeholder="Enter a new description" maxlength="80">
+      <input type="text" name="summary" id="summaryCreate" placeholder="Enter a new summary" maxlength="80">
       <div class="action-buttons-create">
-        <button type='submit' id='create'>Create</button>
+        <button type='submit' id='create'>Update</button>
         <button id='cancel'>Cancel</button>
       </div>
       </form>
       `;
 
       //Get values from form
-      const $createForm = document.getElementById('create-form') as HTMLFormElement;
+      const $updateForm = document.getElementById('update-form') as HTMLFormElement;
       const $cancelButton = document.getElementById('cancel') as HTMLButtonElement;
       const $title = document.getElementById('titleCreate') as HTMLInputElement;
       const $author = document.getElementById('authorCreate') as HTMLInputElement;
@@ -69,11 +69,12 @@ export function createBook() {
       const token:string = decrypt(`${localStorage.getItem(encrypt('token'))}`);
 
 
-      $createForm.addEventListener('submit',async(e) => {
+      $updateForm.addEventListener('submit',async(e) => {
         e.preventDefault();
         if($title.value && $author.value && $description.value && $summary.value){
-          const dataToCreateBook:PostBook={
+          const dataToUpdateBook:UpdateBook={
             token,
+            id,
             data:{
               title:`${$title.value}`,
               author: `${$author.value}`,
@@ -83,16 +84,16 @@ export function createBook() {
             }
           }
           try {
-            const responsePost:ResponseBook = await book.postBook(dataToCreateBook);
+            const responsePost:ResponseBook = await book.updateBook(dataToUpdateBook);
             if(responsePost){
-              showModal(`${capitalizeFirstLetter(responsePost.message)}: Book created successfully`);
+              showModal(`${capitalizeFirstLetter(responsePost.message)}: Book updated successfully`);
             }
           } catch (error) {
             showModal(`${error}`);
           }
         }else{
-          showModal("Please fill in all fields to Create Book");
-          throw new Error("Please fill in all fields to Create Book");
+          showModal("Please fill in all fields to Update Book");
+          throw new Error("Please fill in all fields to Update Book");
         }
       });
 

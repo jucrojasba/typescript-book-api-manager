@@ -1,10 +1,12 @@
 import { showModal } from "../../../components/modals/modal.component";
 import { navBar } from "../../../components/navbar/navbar.component";
 import { BookController } from "../../../controllers/book.controller";
-import { RequestBooks, ResponseRequestBooks } from "../../../models/book.model";
+import { DeleteBook, RequestBooks, ResponseRequestBooks } from "../../../models/book.model";
 import { capitalizeFirstLetter } from "../../../helpers/string-helpers";
 import { decrypt, encrypt } from "../../../services/guard";
 import './home.view.css'
+import { updateBook } from "../../../components/update-book/update-book.component";
+import { showConfirmation } from "../../../components/confirmations/confirmations.component";
 export function homeView() {
   //Page Content Home View
   
@@ -108,6 +110,38 @@ export function homeView() {
       showModal(`${error}`);
     }
 
+    //Update Books
+    const $updateButton = document.querySelectorAll('#edit-book');
+    $updateButton.forEach((button)=>{
+      button.addEventListener('click',()=>{
+        const id:string|null=button.getAttribute('bookId');
+        if(id){
+          updateBook(id);
+        }else{
+          throw new Error('Not Book id found');
+        }
+      })
+    });
+
+    //Delete Book
+    const $deleteButton = document.querySelectorAll('#delete-book');
+    $deleteButton.forEach((button)=>{
+      button.addEventListener('click',async()=>{
+        const id:string|null=button.getAttribute('bookId');
+        const sureDelete= await showConfirmation('Are you sure to delete this book?')
+        if(id && sureDelete.valueOf()){
+          const dataToDelete:DeleteBook={
+            token,
+            id
+          }
+          book.deleteBook(dataToDelete);
+          showModal('Book deleted successfully')
+        }else{
+          throw new Error('Not Book id found');
+        }
+      })
+    });
+
   }//end Loader Function
 
   //Firts time initialize loaderBooks()
@@ -137,8 +171,6 @@ export function homeView() {
     loadPrevButton.addEventListener('click', loadPrevPage);
   }
 
-  //End of Get All Books
 
-
-
+  
 }
