@@ -1,6 +1,7 @@
 import "./navbar.component.css";
 import { encrypt, decrypt } from "../../services/guard";
 import { navigateTo } from "../../router";
+import { createBook } from "../create-book/create-book.component";
 
 //Decrypt auth info by user
 const email:string|null = decrypt(`${localStorage.getItem(encrypt('email'))}`);
@@ -67,7 +68,11 @@ export function navBar() {
     navigateTo('/set-admin');
   })
     //Logic of Create Book
-
+    const $createBook = document.getElementById('createBook') as HTMLButtonElement;
+    $createBook.addEventListener('click',(e)=>{
+    e.preventDefault();
+    createBook();
+  })
 
   }
   

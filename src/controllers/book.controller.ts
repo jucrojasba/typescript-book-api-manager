@@ -1,12 +1,12 @@
 import { DeleteBook, PostBook, RequestBooks, ResponseBook, ResponseRequestBooks, UpdateBook } from "../models/book.model";
 
- export class Book{
+ export class BookController{
     constructor(private endpointBook:string){}
 
     //Controller Request Get All Books
     async getBooks(data:RequestBooks):Promise<ResponseRequestBooks>{
         const domain:string ='http://190.147.64.47:5155/';
-        const params = `?limit=7&page=${data.currentPage}`;
+        const params = `?limit=4&page=${data.currentPage}`;
         const headers: Record<string, string> = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${data.token}`

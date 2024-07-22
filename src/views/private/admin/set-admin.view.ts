@@ -26,7 +26,7 @@ export function setAdminView(){
 
   //Logic to get all users by pagination
   //Instantiate Admin
-  const endpointUsers:string = '/api/v1/users'
+  const endpointUsers:string = '/api/v1/users';
   const admin:AdminController = new AdminController(endpointUsers);
 
   //Get params to send by URL - query params

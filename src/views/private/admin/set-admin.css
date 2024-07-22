@@ -2,11 +2,11 @@
     background-image: url("../../../assets/images/banner-login.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 100%;
     width: 100vw;
 }
 .admin-container {
-    height: calc(100vh - 80px);
+    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
