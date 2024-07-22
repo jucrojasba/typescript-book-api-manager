@@ -55,6 +55,8 @@ export function setAdminView(){
           userCard.className='user-card';
 
           //User name
+          const divCover = document.createElement('div') as HTMLDivElement;
+          divCover.className='user-cover';
           const userName = document.createElement('h2') as HTMLHeadingElement;
           userName.innerHTML = `${capitalizeFirstLetter(user.name)} ${capitalizeFirstLetter(user.lastName)}`;
 
@@ -78,7 +80,8 @@ export function setAdminView(){
 
           //Childs
           usersContainer.appendChild(userCard);
-          userCard.appendChild(userName);
+          userCard.appendChild(divCover);
+          divCover.appendChild(userName);
           userCard.appendChild(userEmail);
           userCard.appendChild(userRole);
           userCard.appendChild(switchRole);
