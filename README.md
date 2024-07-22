@@ -61,3 +61,29 @@ The application includes the following features:
 
 Credentials and other sensitive information are stored in the .env file. Ensure this file is configured correctly to
 
+## Folder Map
+
+root/
+├── src/
+│   ├── assets/
+│   │   ├── icons/
+│   │   └── images/
+│   ├── components/
+│   │   ├── confirmations/
+│   │   ├── create-book/
+│   │   ├── modals/
+│   │   ├── navbar/
+│   │   └── update-book/
+│   ├── controllers/
+│   ├── helpers/
+│   ├── models/
+│   ├── services/
+│   └── views/
+│       ├── private/
+│       │   ├── home/
+│       │   └── admin/
+│       └── public/
+│           ├── login/
+│           ├── register/
+│           └── not-found/
+
