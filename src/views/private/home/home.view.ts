@@ -139,9 +139,6 @@ export function homeView() {
 
   //End of Get All Books
 
-  
-  const date=new Date();
-  console.log(date.toISOString());
 
 
 }

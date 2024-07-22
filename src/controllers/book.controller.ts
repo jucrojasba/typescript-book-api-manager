@@ -43,7 +43,7 @@ import { DeleteBook, PostBook, RequestBooks, ResponseBook, ResponseRequestBooks,
         const result:Response = await fetch(url,reqOptions);
         const responseBody:ResponseBook=await result.json();
         
-        if(result.status === 200){
+        if(result.status === 201){
             return responseBody as ResponseBook
         }else{
             console.error(`Response body: ${responseBody.message}`);

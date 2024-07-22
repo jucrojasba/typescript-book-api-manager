@@ -1,7 +1,9 @@
-import { ResponseBook } from "../../models/book.model";
+import { PostBook, ResponseBook } from "../../models/book.model";
 import { BookController } from "../../controllers/book.controller";
 import { decrypt, encrypt } from "../../services/guard";
+import { showModal } from "../../components/modals/modal.component";
 import "./create-book.component.css";
+import { capitalizeFirstLetter } from "../../helpers/string-helpers";
 
 export function createBook() {
   // Page Content
@@ -29,17 +31,10 @@ export function createBook() {
   const $closeButton = document.getElementById("close-button") as HTMLElement;
   
   //Logic to post book
-  //Instantiate Book
-  const endpointBooks:string = 'api/v1/books';
-  const book:BookController=new BookController(endpointBooks);
-
-  //Get token
-  const token:string = decrypt(`${localStorage.getItem(encrypt('token'))}`);
-  
   //Get values to create book
     if ($modalContainer && $modalMessage && $closeButton) {
       $modalMessage.innerHTML = `
-      <form id="register-form">
+      <form id="create-form">
       <h1>Create Book</h1>
       <input type="text" name="title" id="titleCreate" placeholder="Enter new book title" maxlength="80">
       <input type="text" name="author" id="authorCreate" placeholder="Enter author name" maxlength="80">
@@ -51,14 +46,56 @@ export function createBook() {
       </div>
       </form>
       `;
-      const $createButton = document.getElementById('create') as HTMLButtonElement;
+
+      //Get values from form
+      const $createForm = document.getElementById('create-form') as HTMLFormElement;
       const $cancelButton = document.getElementById('cancel') as HTMLButtonElement;
+      const $title = document.getElementById('titleCreate') as HTMLInputElement;
+      const $author = document.getElementById('authorCreate') as HTMLInputElement;
+      const $description = document.getElementById('descriptionCreate') as HTMLInputElement;
+      const $summary = document.getElementById('summaryCreate') as HTMLInputElement;
+
+      //Get date
+      const date=new Date();
+      const publicationDate=`${date.toISOString()}`;
 
       $modalContainer.style.display = "flex";
 
-      $createButton.onclick = () => {
-        $modalContainer.style.display = "none";
-      };
+      //Instantiate Book
+      const endpointBooks:string = 'api/v1/books';
+      const book:BookController=new BookController(endpointBooks);
+
+      //Get token
+      const token:string = decrypt(`${localStorage.getItem(encrypt('token'))}`);
+
+
+      $createForm.addEventListener('submit',async(e) => {
+        e.preventDefault();
+        if($title.value && $author.value && $description.value && $summary.value){
+          const dataToCreateBook:PostBook={
+            token,
+            data:{
+              title:`${$title.value}`,
+              author: `${$author.value}`,
+              description: `${$description.value}`,
+              summary: `${$summary.value}`,
+              publicationDate: `${publicationDate}`
+            }
+          }
+          try {
+            const responsePost:ResponseBook = await book.postBook(dataToCreateBook);
+            if(responsePost){
+              console.log(responsePost.message);
+              showModal(`${capitalizeFirstLetter(responsePost.message)}: Book created successfully`);
+            }
+          } catch (error) {
+            showModal(`${error}`);
+          }
+        }else{
+          showModal("Please fill in all fields to Create Book");
+          throw new Error("Please fill in all fields to Create Book");
+        }
+      });
 
       $cancelButton.onclick = () => {
         $modalContainer.style.display = "none";
