@@ -3,22 +3,24 @@ import { UserController } from "../../../controllers/user.controller";
 import { navigateTo } from "../../../router";
 import { showModal } from "../../../components/modals/modal.component";
 import { RequestLoginUser, ResponseUser } from "../../../models/user.model";
+import { encrypt } from "../../../services/guard"
 
-export function loginView() {
+export function loginView():void {
   //Page Content Login View
   const $root = document.getElementById("root") as HTMLElement;
   $root.innerHTML = `
     <div class="root-container">
-    <h1>Login</h1>
-    <form id="login-form">
-        <input type="email" name="email" id="email" placeholder="Ingresa tu email" requiered>
-        <input type="password" name="password" id="password" placeholder="Ingresa tu contraseña" requiered>
-        <div class="action-buttons-login">
-          <button type="submit">Login</button>
-          <button>Register</button>
-        </div>
-    </form>
-    <div class="alert-login"></div>
+    <div class="background-login">
+      <form id="login-form">
+      <h1>Login</h1>
+      <input type="email" name="email" id="email" placeholder="Ingresa tu email" requiered>
+      <input type="password" name="password" id="password" placeholder="Ingresa tu contraseña" requiered>
+      <div class="action-buttons-login">
+        <button type="submit">Login</button>
+        <button id="register">Register</button>
+      </div>
+      </form>
+    </div>
     </div>;
     
     `;
@@ -29,11 +31,13 @@ export function loginView() {
   const $password = document.getElementById("password") as HTMLInputElement;
   const $loginForm = document.getElementById("login-form") as HTMLFormElement;
 
-  //Instanciar User Info para Login
-  const endpointLogin = "/api/v1/auth/login";
+  //Instantiate User Info for Login
+  const endpointLogin:string = "/api/v1/auth/login";
   const userLogin: UserController = new UserController(endpointLogin);
 
-  $loginForm?.addEventListener("submit", async (e) => {
+  //Logic to Login
+
+  $loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
     if ($email.value && $password.value) {
       const dataToLogin: RequestLoginUser = {
@@ -44,8 +48,12 @@ export function loginView() {
         const resultLogin: ResponseUser = await userLogin.postLogin(
           dataToLogin
         );
-        localStorage.setItem("token", resultLogin.data.token);
+        localStorage.setItem(`${encrypt('token')}`, encrypt(resultLogin.data.token));
+        localStorage.setItem(`${encrypt('role')}`, encrypt(resultLogin.data.role));
+        localStorage.setItem(`${encrypt('email')}`, encrypt(resultLogin.data.email));
+
         navigateTo("/home");
+        window.location.reload();
       } catch (error) {
         showModal(`${error}`);
       }
@@ -54,4 +62,12 @@ export function loginView() {
       throw new Error("Please fill in all fields to Login");
     }
   });
+
+  //Logic to navigate to Register
+  const $register = document.getElementById('register') as HTMLButtonElement;
+
+  $register.addEventListener('click',(e)=>{
+    e.preventDefault();
+    navigateTo('/register');
+  })
 }

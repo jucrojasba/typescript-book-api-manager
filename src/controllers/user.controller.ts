@@ -2,7 +2,7 @@ import {RequestLoginUser, RequestRegisterUser, ResponseUser} from "../models/use
 export class UserController{
     constructor(private endpointLogin?:string, private endpointRegister?:string){}
 
-    //Controlador de peticion de Login User
+    //Controller Login Request
     async postLogin(data:RequestLoginUser):Promise<ResponseUser>{
         const domain:string = 'http://190.147.64.47:5155'
         const headers: Record<string,string>={
