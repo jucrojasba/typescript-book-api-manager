@@ -15,8 +15,8 @@ export function setAdminView(){
       <h1>User Managment</h1>
       <div id="users-container">
           <div id="buttons-admin-container">
-            <button id="load-prev" style="display: none;">⮜ Previus</button>
-            <button id="load-more">Next ⮞</button>
+            <button id="load-prev" style="display: none;">← Previus</button>
+            <button id="load-more">Next →</button>
           </div>
           <div id="user-card-container"></div>
       </div>

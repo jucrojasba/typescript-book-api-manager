@@ -16,8 +16,8 @@ export function homeView() {
       <h1>Books</h1>
       <div id="books-container">
           <div id="buttons-book-container">
-            <button id="load-prev" style="display: none;">⮜ Previus</button>
-            <button id="load-more">Next ⮞</button>
+            <button id="load-prev" style="display: none;">← Previus</button>
+            <button id="load-more">Next →</button>
           </div>
           <div id="book-card-container"></div>
       </div>
