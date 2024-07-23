@@ -6,8 +6,14 @@ import { capitalizeFirstLetter } from "../../../helpers/string-helpers";
 import { RequestAllUser, RequestUpdateRol, ResponseAdmin, ResponseUpdateRole } from "../../../models/admin.model";
 import { decrypt, encrypt } from "../../../services/guard";
 import "./set-admin.css"
+
 export function setAdminView(){
-    //Page Content Home View
+  //Get params to send by URL - query params
+  //Initialize current page to send param and request first page
+  let currentPage:number = 1; 
+  const token:string = decrypt(`${localStorage.getItem(encrypt('token'))}`);
+
+  //Page Content Home View
 
   const $root = document.getElementById("root") as HTMLElement;
   $root.innerHTML = `
@@ -15,8 +21,8 @@ export function setAdminView(){
       <h1>User Managment</h1>
       <div id="users-container">
           <div id="buttons-admin-container">
-            <button id="load-prev" style="display: none;">← Previus</button>
-            <button id="load-more">Next →</button>
+            <button id="load-prev" style="display: none;"> ← Previus</button>
+            <button id="load-more">Next → Page ${currentPage+1}</button>
           </div>
           <div id="user-card-container"></div>
       </div>
@@ -28,11 +34,6 @@ export function setAdminView(){
   //Instantiate Admin
   const endpointUsers:string = '/api/v1/users';
   const admin:AdminController = new AdminController(endpointUsers);
-
-  //Get params to send by URL - query params
-  //Initialize current page to send param and request first page
-  let currentPage:number = 1; 
-  const token:string = decrypt(`${localStorage.getItem(encrypt('token'))}`);
 
   //Get All Users by pagination
   async function loadUser():Promise<void> {
@@ -97,10 +98,12 @@ export function setAdminView(){
 
       if (loadPrevButton) {
         loadPrevButton.style.display = currentPage > 1 ? 'inline-block' : 'none';
+        loadPrevButton.innerText = `Page ${currentPage-1} ← Previous`;
       }
 
       if (loadMoreButton) {
         loadMoreButton.style.display = resultUsers.data.length < 10 ? 'none' : 'inline-block';
+        loadMoreButton.innerText = `Next → Page ${currentPage+1}`;
       }
     } catch (error) {
       showModal(`${error}`);

@@ -9,7 +9,9 @@ import { updateBook } from "../../../components/update-book/update-book.componen
 import { showConfirmation } from "../../../components/confirmations/confirmations.component";
 export function homeView() {
   //Page Content Home View
-  
+   //Initialize current page to send param and request first page
+   let currentPage:number = 1; 
+
   const $root = document.getElementById("root") as HTMLElement;
   $root.innerHTML = `
     <div class="costumer-container">
@@ -17,7 +19,7 @@ export function homeView() {
       <div id="books-container">
           <div id="buttons-book-container">
             <button id="load-prev" style="display: none;">← Previus</button>
-            <button id="load-more">Next →</button>
+            <button id="load-more">Next → Page ${currentPage+1}</button>
           </div>
           <div id="book-card-container"></div>
       </div>
@@ -32,8 +34,6 @@ export function homeView() {
   const book:BookController=new BookController(endpointBooks);
 
   //Get params to send by URL - query params
-  //Initialize current page to send param and request first page
-  let currentPage:number = 1; 
   const token:string = decrypt(`${localStorage.getItem(encrypt('token'))}`);
   const role:string = decrypt(`${localStorage.getItem(encrypt('role'))}`);
 
@@ -100,10 +100,12 @@ export function homeView() {
 
       if (loadPrevButton) {
         loadPrevButton.style.display = currentPage > 1 ? 'inline-block' : 'none';
+        loadPrevButton.innerText = `Page ${currentPage-1} ← Previous`;
       }
 
       if (loadMoreButton) {
         loadMoreButton.style.display = bookResponse.data.length < 4 ? 'none' : 'inline-block';
+        loadMoreButton.innerText = `Next → Page ${currentPage+1}`;
       }
 
     } catch (error) {

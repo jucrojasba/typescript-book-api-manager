@@ -42,7 +42,7 @@ export function createBook() {
       <input type="text" name="summary" id="summaryCreate" placeholder="Enter a summary" maxlength="80">
       <div class="action-buttons-create">
         <button type='submit' id='create'>Create</button>
-        <button id='cancel'>Cancel</button>
+        <button id='cancel' type='button'>Cancel</button>
       </div>
       </form>
       `;

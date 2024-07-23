@@ -30,7 +30,7 @@ export function updateBook(id:string) {
   const $modalMessage = document.getElementById("modal-message") as HTMLElement;
   const $closeButton = document.getElementById("close-button") as HTMLElement;
   
-  //Logic to post book
+  //Logic to update book
   //Get values to create book
     if ($modalContainer && $modalMessage && $closeButton) {
       $modalMessage.innerHTML = `
@@ -42,7 +42,7 @@ export function updateBook(id:string) {
       <input type="text" name="summary" id="summaryCreate" placeholder="Enter a new summary" maxlength="80">
       <div class="action-buttons-create">
         <button type='submit' id='create'>Update</button>
-        <button id='cancel'>Cancel</button>
+        <button id='cancel' type='button'>Cancel</button>
       </div>
       </form>
       `;
