@@ -59,7 +59,7 @@ The application includes the following features:
 
 ## Environment Variables
 
-Credentials and other sensitive information are stored in the .env file. Ensure this file is configured correctly to
+Credentials and other sensitive information are stored in the .env file. 
 
 ## Folder Structure
 
